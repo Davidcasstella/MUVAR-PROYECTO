@@ -1,0 +1,103 @@
+@use './variables' as *;
+
+// ============================================
+// MIXINS DE COLORES
+// ============================================
+
+@mixin color($color, $variante: 'base') {
+  @if $variante == 'base' {
+    color: $color;
+  } @else if $variante == 'light' {
+    color: lighten($color, 20%);
+  } @else if $variante == 'dark' {
+    color: darken($color, 20%);
+  }
+}
+
+@mixin fondo-color($color, $variante: 'base') {
+  @if $variante == 'base' {
+    background-color: $color;
+  } @else if $variante == 'light' {
+    background-color: lighten($color, 20%);
+  } @else if $variante == 'dark' {
+    background-color: darken($color, 20%);
+  }
+}
+
+// ============================================
+// MIXINS DE FLEXBOX
+// ============================================
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// ============================================
+// MIXINS DE RESPONSIVE
+// ============================================
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == 'sm' {
+    @media (min-width: 640px) { @content; }
+  } @else if $breakpoint == 'md' {
+    @media (min-width: 768px) { @content; }
+  } @else if $breakpoint == 'lg' {
+    @media (min-width: 1024px) { @content; }
+  } @else if $breakpoint == 'xl' {
+    @media (min-width: 1280px) { @content; }
+  }
+}
+
+// ============================================
+// MIXINS DE TEXTO
+// ============================================
+
+@mixin texto-truncar {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin texto-truncar-lineas($lineas) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lineas;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// ============================================
+// MIXINS DE SCROLLBAR
+// ============================================
+
+@mixin scrollbar-personalizado($tamano: 8px, $color-fondo: #{$color-borde-claro}, $color-thumb: #{$color-primario}) {
+  &::-webkit-scrollbar {
+    width: $tamano;
+    height: $tamano;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $color-fondo;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $color-thumb;
+    border-radius: $tamano;
+
+    &:hover {
+      background-color: darken($color-thumb, 10%);
+    }
+  }
+}

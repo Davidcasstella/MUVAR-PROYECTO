@@ -1,0 +1,51 @@
+<div class="layout-administracion">
+  <aside class="layout-administracion-barra-lateral">
+    <div class="barra-lateral-cabecera">
+      <div class="barra-lateral-logo">
+        <span>MUVAR</span>
+      </div>
+    </div>
+
+    <nav class="barra-lateral-navegacion">
+      <a
+        routerLink="/app/dashboard"
+        routerLinkActive="activo"
+        class="nav-enlace"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <span class="nav-icono">📊</span>
+        <span>Dashboard</span>
+      </a>
+
+      <a
+        routerLink="/app/usuarios"
+        routerLinkActive="activo"
+        class="nav-enlace"
+      >
+        <span class="nav-icono">👥</span>
+        <span>Usuarios</span>
+      </a>
+    </nav>
+
+    <div class="barra-lateral-pie">
+      <button (click)="cerrarSesion()" class="boton-cerrar-sesion">
+        Cerrar Sesión
+      </button>
+    </div>
+  </aside>
+
+  <main class="layout-administracion-principal">
+    <header class="administracion-cabecera">
+      <div class="cabecera-contenedor">
+        <h1 class="cabecera-titulo">Panel de Administración</h1>
+        <div class="cabecera-usuario">
+          <span>Usuario</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="administracion-contenido">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>

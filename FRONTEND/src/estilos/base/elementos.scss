@@ -1,0 +1,59 @@
+@use '../abstractos/variables' as *;
+
+/**
+ * Estilos base para elementos HTML
+ */
+
+h1 {
+  font-size: $tamano-texto-3xl;
+}
+
+h2 {
+  font-size: $tamano-texto-2xl;
+}
+
+h3 {
+  font-size: $tamano-texto-xl;
+}
+
+h4 {
+  font-size: $tamano-texto-lg;
+}
+
+h5 {
+  font-size: $tamano-texto-base;
+}
+
+h6 {
+  font-size: $tamano-texto-sm;
+}
+
+p {
+  line-height: 1.6;
+}
+
+a {
+  transition: color $duracion-transicion-base $funcion-transicion;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+button {
+  transition: all $duracion-transicion-base $funcion-transicion;
+}
+
+input,
+textarea,
+select {
+  border: 1px solid var(--color-borde);
+  border-radius: $radio-borde-md;
+  padding: $espaciado-sm $espaciado-md;
+  transition: border-color $duracion-transicion-base $funcion-transicion;
+
+  &:focus {
+    outline: none;
+    border-color: $color-primario;
+  }
+}

@@ -1,0 +1,32 @@
+@use '../abstractos/variables' as *;
+
+/**
+ * Estilos base para formularios
+ */
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: $espaciado-sm;
+
+  label {
+    font-size: $tamano-texto-sm;
+    font-weight: $peso-font-medium;
+    color: var(--color-texto-principal);
+  }
+
+  input,
+  textarea,
+  select {
+    width: 100%;
+
+    &.error {
+      border-color: var(--color-peligro);
+    }
+  }
+
+  .error-mensaje {
+    font-size: $tamano-texto-xs;
+    color: var(--color-peligro);
+  }
+}

@@ -1,0 +1,54 @@
+@use '../abstractos/variables' as *;
+
+/**
+ * Estilos base para botones
+ */
+
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $espaciado-sm $espaciado-lg;
+  font-size: $tamano-texto-sm;
+  font-weight: $peso-font-medium;
+  border-radius: $radio-borde-md;
+  transition: all $duracion-transicion-base $funcion-transicion;
+  cursor: pointer;
+  border: none;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.boton-primario {
+  @extend .boton;
+  background-color: var(--color-primario);
+  color: white;
+
+  &:hover:not(:disabled) {
+    background-color: var(--color-primario-oscuro);
+  }
+}
+
+.boton-secundario {
+  @extend .boton;
+  background-color: transparent;
+  border: 1px solid var(--color-borde);
+  color: var(--color-texto-principal);
+
+  &:hover:not(:disabled) {
+    background-color: var(--color-fondo-hover);
+  }
+}
+
+.boton-peligro {
+  @extend .boton;
+  background-color: var(--color-peligro);
+  color: white;
+
+  &:hover:not(:disabled) {
+    background-color: var(--color-peligro-oscuro);
+  }
+}

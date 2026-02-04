@@ -1,0 +1,144 @@
+<app-navbar></app-navbar>
+
+<main class="landing-page">
+  <!-- ============================================ -->
+  <!-- HERO SECTION -->
+  <!-- ============================================ -->
+  <section class="hero-section">
+    <div class="hero-background">
+      <img
+        src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1920&h=1080&fit=crop"
+        alt="Edificio moderno"
+        class="hero-imagen"
+      />
+      <div class="hero-overlay"></div>
+    </div>
+
+    <div class="hero-contenido">
+      <div class="hero-texto">
+        <h1 class="hero-titulo">
+          Construimos<br />
+          <span class="titulo-resaltado">espacios para tu futuro</span>
+        </h1>
+        <p class="hero-subtitulo">
+          Proyectos inmobiliarios diseñados para la vida real. Calidad, confianza y experiencia en
+          cada metro cuadrado.
+        </p>
+        <div class="hero-botones">
+          <button class="btn btn-primary btn-lg" (click)="verTodosLosProyectos()">
+            <span>Ver Proyectos</span>
+          </button>
+          <button class="btn btn-outline btn-lg" (click)="scrollToContacto()">
+            <span>Contáctanos</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+      <div class="scroll-indicator-bar"></div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- PROYECTOS DESTACADOS -->
+  <!-- ============================================ -->
+  <section class="proyectos-destacados-section">
+    <div class="section-container">
+      <!-- Encabezado de sección -->
+      <div class="section-header">
+        <h2 class="section-titulo">Proyectos Destacados</h2>
+        <p class="section-subtitulo">
+          Descubre nuestra selección de proyectos inmobiliarios exclusivos en las mejores
+          ubicaciones
+        </p>
+      </div>
+
+      <!-- Grid de proyectos -->
+      <div class="proyectos-grid" *ngIf="!estaCargando">
+        <ng-container *ngIf="proyectosDestacados$ | async as proyectos">
+          <app-proyecto-card
+            *ngFor="let proyecto of proyectos"
+            [proyecto]="proyecto"
+            (cardClick)="verProyecto($event)"
+          ></app-proyecto-card>
+        </ng-container>
+      </div>
+
+      <!-- Skeleton loader -->
+      <div class="proyectos-grid" *ngIf="estaCargando">
+        <div class="skeleton-card" *ngFor="let i of [1, 2, 3]"></div>
+      </div>
+
+      <!-- Ver todos los proyectos -->
+      <div class="section-cta">
+        <button class="btn btn-secondary btn-lg" (click)="verTodosLosProyectos()">
+          <span>Ver todos los proyectos</span>
+          <svg class="icono-flecha" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SECCIÓN DE VALORES (opcional) -->
+  <!-- ============================================ -->
+  <section class="valores-section">
+    <div class="section-container">
+      <div class="valores-grid">
+        <div class="valor-item">
+          <div class="valor-icono">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <h3 class="valor-titulo">Calidad Certificada</h3>
+          <p class="valor-descripcion">
+            Proyectos con los más altos estándares de construcción y acabados de primera
+          </p>
+        </div>
+
+        <div class="valor-item">
+          <div class="valor-icono">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+          </div>
+          <h3 class="valor-titulo">Experiencia Comprobada</h3>
+          <p class="valor-descripcion">
+            Más de 15 años construyendo hogares y generando confianza en nuestras familias
+          </p>
+        </div>
+
+        <div class="valor-item">
+          <div class="valor-icono">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="valor-titulo">Ubicaciones Premium</h3>
+          <p class="valor-descripcion">
+            Proyectos estratégicamente ubicados en las mejores zonas de Boyacá y Bogotá
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<app-whatsapp-button [telefono]="'573000000000'" [mensaje]="'Hola, me gustaría recibir información sobre sus proyectos'"></app-whatsapp-button>
+
+<footer class="landing-footer">
+  <div class="footer-contenido">
+    <div class="footer-section">
+      <h3 class="footer-titulo">Inversiones Muvar</h3>
+      <p class="footer-texto">Construimos espacios para tu futuro</p>
+    </div>
+    <div class="footer-section">
+      <p class="footer-copy">&copy; 2025 Inversiones Muvar. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>

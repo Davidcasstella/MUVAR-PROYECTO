@@ -1,0 +1,69 @@
+<div class="acceso-contenedor">
+  <div class="acceso-tarjeta">
+    <div class="acceso-cabecera">
+      <h1 class="acceso-titulo">Iniciar Sesión</h1>
+      <p class="acceso-subtitulo">Ingresa tus credenciales para acceder</p>
+    </div>
+
+    <form [formGroup]="formulario" (ngSubmit)="iniciarSesion()" class="acceso-formulario">
+      <div class="campo-formulario">
+        <label for="email">Correo electrónico</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="ejemplo@correo.com"
+          [class.error]="formulario.get('email')?.touched && formulario.get('email')?.invalid"
+        />
+        <span class="error-mensaje" *ngIf="formulario.get('email')?.touched && formulario.get('email')?.hasError('required')">
+          El correo es requerido
+        </span>
+        <span class="error-mensaje" *ngIf="formulario.get('email')?.touched && formulario.get('email')?.hasError('email')">
+          Formato de correo inválido
+        </span>
+      </div>
+
+      <div class="campo-formulario">
+        <label for="password">Contraseña</label>
+        <div class="password-input">
+          <input
+            id="password"
+            [type]="mostrarPassword ? 'text' : 'password'"
+            formControlName="password"
+            placeholder="••••••••"
+            [class.error]="formulario.get('password')?.touched && formulario.get('password')?.invalid"
+          />
+          <button
+            type="button"
+            class="toggle-password"
+            (click)="alternarPassword()"
+          >
+            {{ mostrarPassword ? '👁️' : '👁️‍🗨️' }}
+          </button>
+        </div>
+        <span class="error-mensaje" *ngIf="formulario.get('password')?.touched && formulario.get('password')?.hasError('required')">
+          La contraseña es requerida
+        </span>
+        <span class="error-mensaje" *ngIf="formulario.get('password')?.touched && formulario.get('password')?.hasError('minlength')">
+          Mínimo 6 caracteres
+        </span>
+      </div>
+
+      <div class="formulario-acciones">
+        <a routerLink="/recuperar-password" class="olvide-password">¿Olvidaste tu contraseña?</a>
+      </div>
+
+      <button
+        type="submit"
+        class="boton-submit"
+        [disabled]="cargando || formulario.invalid"
+      >
+        {{ cargando ? 'Iniciando sesión...' : 'Iniciar Sesión' }}
+      </button>
+    </form>
+
+    <div class="acceso-pie">
+      <p>¿No tienes cuenta? <a routerLink="/registro" class="enlace">Regístrate</a></p>
+    </div>
+  </div>
+</div>

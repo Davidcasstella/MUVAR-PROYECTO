@@ -1,0 +1,32 @@
+<div class="usuarios-contenedor">
+  <div class="usuarios-cabecera">
+    <h1 class="usuarios-titulo">Usuarios</h1>
+    <button class="boton-agregar">+ Agregar Usuario</button>
+  </div>
+
+  <div class="usuarios-tabla">
+    <table class="tabla">
+      <thead>
+        <tr>
+          <th *ngFor="let col of columns">{{ col }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of usuarios">
+          <td>{{ usuario.nombre }}</td>
+          <td>{{ usuario.email }}</td>
+          <td>{{ usuario.rol }}</td>
+          <td>
+            <span class="estado" [class.activo]="usuario.estado === 'Activo'">
+              {{ usuario.estado }}
+            </span>
+          </td>
+          <td>
+            <button class="boton-accion">Editar</button>
+            <button class="boton-accion peligro">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

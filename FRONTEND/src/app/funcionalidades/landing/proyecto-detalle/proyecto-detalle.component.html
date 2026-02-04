@@ -1,0 +1,182 @@
+<app-navbar></app-navbar>
+
+<main class="proyecto-detalle-page" *ngIf="!estaCargando; else cargando">
+  <ng-container *ngIf="proyecto$ | async as proyecto; else proyectoNoEncontrado">
+    <!-- ============================================ -->
+    <!-- GALERÍA DE IMÁGENES -->
+    <!-- ============================================ -->
+    <section class="galeria-section">
+      <div class="galeria-principal">
+        <img [src]="imagenActiva" [alt]="proyecto.nombre" class="imagen-principal" />
+
+        <!-- Controles de navegación -->
+        <button class="galeria-nav galeria-nav-prev" (click)="imagenAnterior()" *ngIf="proyecto.imagenes.length > 1">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <button class="galeria-nav galeria-nav-next" (click)="imagenSiguiente()" *ngIf="proyecto.imagenes.length > 1">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Thumbnails -->
+      <div class="galeria-thumbnails" *ngIf="proyecto.imagenes.length > 1">
+        <div
+          class="thumbnail"
+          *ngFor="let imagen of proyecto.imagenes; let i = index"
+          [class.active]="i === imagenActivaIndex"
+          (click)="cambiarImagen(i)"
+        >
+          <img [src]="imagen.url" [alt]="imagen.titulo" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- INFORMACIÓN PRINCIPAL -->
+    <!-- ============================================ -->
+    <section class="info-section">
+      <div class="info-container">
+        <!-- Header del proyecto -->
+        <div class="proyecto-header">
+          <div class="header-badges">
+            <span class="badge-estado" [class]="getEstadoClase(proyecto.estado)">
+              {{ getEstadoEtiqueta(proyecto.estado) }}
+            </span>
+            <span class="badge-ubicacion">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              {{ proyecto.ubicacion }}
+            </span>
+          </div>
+
+          <h1 class="proyecto-titulo">{{ proyecto.nombre }}</h1>
+
+          <div class="proyecto-direccion">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            </svg>
+            {{ proyecto.direccion }}
+          </div>
+
+          <!-- Precio -->
+          <div class="proyecto-precio" *ngIf="proyecto.estado !== estadoProyecto.VENDIDO">
+            <span class="precio-label">Desde</span>
+            <span class="precio-valor">{{ formatearPrecio(proyecto.precios.rango.desde) }}</span>
+            <span class="precio-cuota">Cuota inicial: {{ formatearPrecio(proyecto.precios.cuotaInicialDesde) }}</span>
+          </div>
+        </div>
+
+        <!-- Grid de información -->
+        <div class="proyecto-grid">
+          <!-- Descripción -->
+          <div class="info-column descripcion">
+            <h2 class="section-title">Descripción</h2>
+            <p class="descripcion-texto">{{ proyecto.descripcion }}</p>
+          </div>
+
+          <!-- Características -->
+          <div class="info-column caracteristicas">
+            <h2 class="section-title">Características</h2>
+            <div class="caracteristicas-grid">
+              <div class="caracteristica-item" *ngFor="let caracteristica of proyecto.caracteristicas">
+                <div class="caracteristica-icono">
+                  <svg *ngIf="caracteristica.icono === 'bed'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                  </svg>
+                  <svg *ngIf="caracteristica.icono === 'bath'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
+                  </svg>
+                  <svg *ngIf="caracteristica.icono === 'square'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5z" />
+                  </svg>
+                  <svg *ngIf="caracteristica.icono === 'car'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                  </svg>
+                  <svg *ngIf="!['bed', 'bath', 'square', 'car'].includes(caracteristica.icono)" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div class="caracteristica-info">
+                  <span class="caracteristica-etiqueta">{{ caracteristica.etiqueta }}</span>
+                  <span class="caracteristica-valor">{{ caracteristica.valor }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="proyecto-cta">
+          <button class="btn btn-primary btn-lg" (click)="agendarVisita()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <span>Agendar visita</span>
+          </button>
+          <a routerLink="/proyectos" class="btn btn-outline btn-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <span>Ver más proyectos</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- PROYECTOS RELACIONADOS -->
+    <!-- ============================================ -->
+    <section class="relacionados-section" *ngIf="proyectosRelacionados$ | async as relacionados">
+      <div class="section-container">
+        <h2 class="section-title">Proyectos Relacionados</h2>
+        <p class="section-subtitulo">Otros proyectos en {{ proyecto.ubicacion }}</p>
+
+        <div class="relacionados-grid">
+          <app-proyecto-card
+            *ngFor="let relacionado of relacionados"
+            [proyecto]="relacionado"
+            (cardClick)="navegarAProyecto(relacionado.id)"
+          ></app-proyecto-card>
+        </div>
+      </div>
+    </section>
+  </ng-container>
+</main>
+
+<ng-template #cargando>
+  <div class="loading-container">
+    <div class="loading-spinner"></div>
+    <p class="loading-text">Cargando proyecto...</p>
+  </div>
+</ng-template>
+
+<ng-template #proyectoNoEncontrado>
+  <div class="no-encontrado-container">
+    <svg class="no-encontrado-icono" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <h2 class="no-encontrado-titulo">Proyecto no encontrado</h2>
+    <p class="no-encontrado-texto">El proyecto que buscas no existe o ha sido eliminado.</p>
+    <a routerLink="/proyectos" class="btn btn-primary">Ver todos los proyectos</a>
+  </div>
+</ng-template>
+
+<ng-container *ngIf="proyecto$ | async as proyecto">
+  <app-whatsapp-button
+    *ngIf="!estaCargando && proyecto"
+    [telefono]="'573000000000'"
+    [mensaje]="'Hola, me gustaría información sobre el proyecto ' + proyecto.nombre"
+  ></app-whatsapp-button>
+</ng-container>
+
+<footer class="landing-footer">
+  <div class="footer-contenido">
+    <p class="footer-copy">&copy; 2025 Inversiones Muvar. Todos los derechos reservados.</p>
+  </div>
+</footer>

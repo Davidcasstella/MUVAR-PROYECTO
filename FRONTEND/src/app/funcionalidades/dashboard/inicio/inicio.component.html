@@ -1,0 +1,26 @@
+<div class="dashboard-contenedor">
+  <h1 class="dashboard-titulo">Dashboard</h1>
+
+  <div class="dashboard-grid">
+    <div
+      *ngFor="let stat of estadisticas"
+      class="tarjeta-estadistica"
+      [style.border-left-color]="stat.color"
+    >
+      <div class="estadistica-icono" [style.background-color]="stat.color + '20'">
+        <span [style.font-size]="'2rem'">{{ stat.icono }}</span>
+      </div>
+      <div class="estadistica-info">
+        <h3 class="estadistica-titulo">{{ stat.titulo }}</h3>
+        <p class="estadistica-valor">{{ stat.valor }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-contenido">
+    <div class="tarjeta">
+      <h2>Bienvenido a MUVAR</h2>
+      <p>Este es tu panel de control principal. Desde aquí puedes gestionar todas las funcionalidades de la plataforma.</p>
+    </div>
+  </div>
+</div>

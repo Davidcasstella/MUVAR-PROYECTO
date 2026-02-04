@@ -1,0 +1,111 @@
+{
+  "idioma": "English",
+  "nombre": "MUVAR",
+  "descripcion": "Enterprise Management Platform",
+
+  "comun": {
+    "si": "Yes",
+    "no": "No",
+    "guardar": "Save",
+    "cancelar": "Cancel",
+    "eliminar": "Delete",
+    "editar": "Edit",
+    "crear": "Create",
+    "buscar": "Search",
+    "filtrar": "Filter",
+    "limpiar": "Clear",
+    "cargando": "Loading...",
+    "error": "Error",
+    "exito": "Success",
+    "advertencia": "Warning",
+    "informacion": "Information"
+  },
+
+  "autenticacion": {
+    "acceso": {
+      "titulo": "Sign In",
+      "subtitulo": "Enter your credentials to access",
+      "email": "Email",
+      "password": "Password",
+      "recordarme": "Remember me",
+      "olvidastePassword": "Forgot your password?",
+      "boton": "Sign In",
+      "noCuenta": "Don't have an account?",
+      "registrate": "Sign up"
+    },
+    "registro": {
+      "titulo": "Create Account",
+      "subtitulo": "Sign up to start using the platform",
+      "nombre": "Full name",
+      "email": "Email",
+      "password": "Password",
+      "confirmarPassword": "Confirm password",
+      "boton": "Sign up",
+      "yaCuenta": "Already have an account?",
+      "iniciaSesion": "Sign in"
+    },
+    "recuperarPassword": {
+      "titulo": "Recover Password",
+      "subtitulo": "Enter your email and we'll send you instructions",
+      "email": "Email",
+      "boton": "Send Instructions",
+      "volver": "Back to sign in"
+    }
+  },
+
+  "dashboard": {
+    "titulo": "Dashboard",
+    "bienvenido": "Welcome to MUVAR",
+    "descripcion": "This is your main control panel"
+  },
+
+  "usuarios": {
+    "titulo": "Users",
+    "listar": "List Users",
+    "crear": "Create User",
+    "editar": "Edit User",
+    "detalle": "User Detail",
+    "agregar": "Add User",
+    "total": "Total Users",
+    "activos": "Active",
+    "inactivos": "Inactive",
+    "campos": {
+      "nombre": "Name",
+      "email": "Email",
+      "rol": "Role",
+      "estado": "Status"
+    }
+  },
+
+  "layout": {
+    "publico": {
+      "inicio": "Home",
+      "acceso": "Sign In",
+      "registro": "Sign up"
+    },
+    "administracion": {
+      "dashboard": "Dashboard",
+      "usuarios": "Users",
+      "configuracion": "Configuration",
+      "cerrarSesion": "Sign out"
+    }
+  },
+
+  "errores": {
+    "404": {
+      "titulo": "Page not found",
+      "mensaje": "The page you are looking for does not exist or has been moved",
+      "volver": "Back to home"
+    },
+    "403": {
+      "titulo": "Access denied",
+      "mensaje": "You don't have the necessary permissions to access this page",
+      "volver": "Go back"
+    },
+    "500": {
+      "titulo": "Server error",
+      "mensaje": "An unexpected error occurred. Please try again later",
+      "recargar": "Reload page"
+    }
+  }
+}

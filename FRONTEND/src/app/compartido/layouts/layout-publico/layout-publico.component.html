@@ -1,0 +1,37 @@
+<header class="layout-publico-cabecera">
+  <div class="layout-publico-contenedor">
+    <div class="layout-publico-logo">
+      <a routerLink="/" class="logo-enlace">
+        <span class="logo-texto">MUVAR</span>
+      </a>
+    </div>
+
+    <nav class="layout-publico-navegacion">
+      <a
+        routerLink="/acceso"
+        routerLinkActive="activo"
+        class="nav-enlace"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Iniciar Sesión
+      </a>
+      <a
+        routerLink="/registro"
+        routerLinkActive="activo"
+        class="nav-enlace nav-enlace-destacado"
+      >
+        Registrarse
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main class="layout-publico-principal">
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="layout-publico-pie">
+  <div class="layout-publico-contenedor">
+    <p>&copy; 2026 MUVAR. Todos los derechos reservados.</p>
+  </div>
+</footer>

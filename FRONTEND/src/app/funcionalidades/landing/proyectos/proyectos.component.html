@@ -1,0 +1,169 @@
+<app-navbar></app-navbar>
+
+<main class="proyectos-page">
+  <div class="page-header">
+    <div class="header-contenido">
+      <h1 class="page-titulo">Nuestros Proyectos</h1>
+      <p class="page-subtitulo">
+        Descubre proyectos inmobiliarios exclusivos diseñados para tu estilo de vida
+      </p>
+    </div>
+  </div>
+
+  <div class="page-container">
+    <!-- Sidebar de Filtros -->
+    <aside class="filtros-sidebar" *ngIf="!estaCargando">
+      <div class="filtros-contenido">
+        <!-- Encabezado de filtros -->
+        <div class="filtros-header">
+          <h2 class="filtros-titulo">Filtros</h2>
+          <button
+            class="btn-limpiar"
+            *ngIf="tieneFiltrosActivos"
+            (click)="limpiarFiltros()"
+          >
+            Limpiar todos
+          </button>
+        </div>
+
+        <!-- Buscador -->
+        <div class="filtro-grupo">
+          <label class="filtro-label">Buscar</label>
+          <input
+            type="text"
+            class="filtro-input"
+            placeholder="Nombre del proyecto..."
+            [formControl]="busquedaControl"
+          />
+        </div>
+
+        <!-- Filtro por Ciudad -->
+        <div class="filtro-grupo">
+          <label class="filtro-label">Ciudad</label>
+          <div class="filtro-opciones">
+            <label
+              class="filtro-option"
+              *ngFor="let ciudad of ciudades"
+              [class.active]="ciudadesSeleccionadas.includes(ciudad)"
+            >
+              <input
+                type="checkbox"
+                [checked]="ciudadesSeleccionadas.includes(ciudad)"
+                (change)="toggleCiudad(ciudad)"
+              />
+              <span class="option-text">{{ ciudad }}</span>
+              <span class="option-check" *ngIf="ciudadesSeleccionadas.includes(ciudad)">✓</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Filtro por Estado -->
+        <div class="filtro-grupo">
+          <label class="filtro-label">Estado</label>
+          <div class="filtro-opciones">
+            <label
+              class="filtro-option"
+              *ngFor="let estado of estados"
+              [class.active]="estadosSeleccionados.includes(estado)"
+            >
+              <input
+                type="checkbox"
+                [checked]="estadosSeleccionados.includes(estado)"
+                (change)="toggleEstado(estado)"
+              />
+              <span class="option-text">
+                {{ estado === 'EN_CONSTRUCCION' ? 'En Construcción' :
+                   estado === 'PREVENTA' ? 'Preventa' :
+                   estado === 'ENTREGADO' ? 'Entregado' : 'Vendado' }}
+              </span>
+              <span class="option-check" *ngIf="estadosSeleccionados.includes(estado)">✓</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Botón móvil para cerrar filtros -->
+        <button class="btn-aplicar mobile" (click)="limpiarFiltros()">
+          Aplicar filtros
+        </button>
+      </div>
+    </aside>
+
+    <!-- Contenido Principal -->
+    <section class="proyectos-contenido">
+      <!-- Resultados -->
+      <div class="resultados-header">
+        <p class="resultados-info">
+          Mostrando <strong>{{ totalResultados }}</strong> proyecto{{ totalResultados !== 1 ? 's' : '' }}
+        </p>
+      </div>
+
+      <!-- Grid de Proyectos -->
+      <div class="proyectos-grid">
+        <ng-container *ngIf="proyectos$ | async as respuesta">
+          <app-proyecto-card
+            *ngFor="let proyecto of respuesta.proyectos"
+            [proyecto]="proyecto"
+            (cardClick)="verProyecto($event)"
+          ></app-proyecto-card>
+
+          <!-- Estado vacío -->
+          <div class="estado-vacio" *ngIf="respuesta.proyectos.length === 0">
+            <svg class="vacio-icono" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <h3 class="vacio-titulo">No se encontraron proyectos</h3>
+            <p class="vacio-texto">
+              Intenta ajustar los filtros de búsqueda para ver más resultados
+            </p>
+            <button class="btn btn-secondary" (click)="limpiarFiltros()">
+              Limpiar filtros
+            </button>
+          </div>
+        </ng-container>
+      </div>
+
+      <!-- Paginación -->
+      <div class="paginacion" *ngIf="totalPaginas > 1">
+        <button
+          class="paginacion-boton"
+          [disabled]="paginaActual === 1"
+          (click)="cambiarPagina(paginaActual - 1)"
+          aria-label="Página anterior"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
+        <ng-container *ngFor="let pagina of paginas">
+          <button
+            class="paginacion-numero"
+            [class.active]="pagina === paginaActual"
+            (click)="cambiarPagina(pagina)"
+          >
+            {{ pagina }}
+          </button>
+        </ng-container>
+
+        <button
+          class="paginacion-boton"
+          [disabled]="paginaActual === totalPaginas"
+          (click)="cambiarPagina(paginaActual + 1)"
+          aria-label="Página siguiente"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+    </section>
+  </div>
+</main>
+
+<app-whatsapp-button [telefono]="'573000000000'" [mensaje]="'Hola, me gustaría información sobre sus proyectos'"></app-whatsapp-button>
+
+<footer class="landing-footer">
+  <div class="footer-contenido">
+    <p class="footer-copy">&copy; 2025 Inversiones Muvar. Todos los derechos reservados.</p>
+  </div>
+</footer>

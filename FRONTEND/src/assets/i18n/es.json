@@ -1,0 +1,111 @@
+{
+  "idioma": "Español",
+  "nombre": "MUVAR",
+  "descripcion": "Plataforma Enterprise de Gestión",
+
+  "comun": {
+    "si": "Sí",
+    "no": "No",
+    "guardar": "Guardar",
+    "cancelar": "Cancelar",
+    "eliminar": "Eliminar",
+    "editar": "Editar",
+    "crear": "Crear",
+    "buscar": "Buscar",
+    "filtrar": "Filtrar",
+    "limpiar": "Limpiar",
+    "cargando": "Cargando...",
+    "error": "Error",
+    "exito": "Éxito",
+    "advertencia": "Advertencia",
+    "informacion": "Información"
+  },
+
+  "autenticacion": {
+    "acceso": {
+      "titulo": "Iniciar Sesión",
+      "subtitulo": "Ingresa tus credenciales para acceder",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "recordarme": "Recordarme",
+      "olvidastePassword": "¿Olvidaste tu contraseña?",
+      "boton": "Iniciar Sesión",
+      "noCuenta": "¿No tienes cuenta?",
+      "registrate": "Regístrate"
+    },
+    "registro": {
+      "titulo": "Crear Cuenta",
+      "subtitulo": "Regístrate para comenzar a usar la plataforma",
+      "nombre": "Nombre completo",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "confirmarPassword": "Confirmar contraseña",
+      "boton": "Registrarse",
+      "yaCuenta": "¿Ya tienes cuenta?",
+      "iniciaSesion": "Inicia sesión"
+    },
+    "recuperarPassword": {
+      "titulo": "Recuperar Contraseña",
+      "subtitulo": "Ingresa tu correo electrónico y te enviaremos instrucciones",
+      "email": "Correo electrónico",
+      "boton": "Enviar Instrucciones",
+      "volver": "Volver al inicio de sesión"
+    }
+  },
+
+  "dashboard": {
+    "titulo": "Dashboard",
+    "bienvenido": "Bienvenido a MUVAR",
+    "descripcion": "Este es tu panel de control principal"
+  },
+
+  "usuarios": {
+    "titulo": "Usuarios",
+    "listar": "Listar Usuarios",
+    "crear": "Crear Usuario",
+    "editar": "Editar Usuario",
+    "detalle": "Detalle de Usuario",
+    "agregar": "Agregar Usuario",
+    "total": "Usuarios Totales",
+    "activos": "Activos",
+    "inactivos": "Inactivos",
+    "campos": {
+      "nombre": "Nombre",
+      "email": "Correo electrónico",
+      "rol": "Rol",
+      "estado": "Estado"
+    }
+  },
+
+  "layout": {
+    "publico": {
+      "inicio": "Inicio",
+      "acceso": "Iniciar Sesión",
+      "registro": "Registrarse"
+    },
+    "administracion": {
+      "dashboard": "Dashboard",
+      "usuarios": "Usuarios",
+      "configuracion": "Configuración",
+      "cerrarSesion": "Cerrar Sesión"
+    }
+  },
+
+  "errores": {
+    "404": {
+      "titulo": "Página no encontrada",
+      "mensaje": "La página que buscas no existe o ha sido movida",
+      "volver": "Volver al inicio"
+    },
+    "403": {
+      "titulo": "Acceso denegado",
+      "mensaje": "No tienes los permisos necesarios para acceder a esta página",
+      "volver": "Volver atrás"
+    },
+    "500": {
+      "titulo": "Error del servidor",
+      "mensaje": "Ha ocurrido un error inesperado. Por favor, inténtalo de nuevo más tarde",
+      "recargar": "Recargar página"
+    }
+  }
+}

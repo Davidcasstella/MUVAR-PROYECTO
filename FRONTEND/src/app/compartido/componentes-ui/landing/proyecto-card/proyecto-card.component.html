@@ -1,0 +1,65 @@
+<article
+  class="proyecto-card"
+  [class.list-layout]="layout === 'list'"
+  (click)="verProyecto()"
+  tabindex="0"
+  (keydown.enter)="verProyecto()"
+  role="button"
+  [attr.aria-label]="'Ver proyecto ' + proyecto.nombre"
+>
+  <!-- Imagen -->
+  <div class="card-imagen">
+    <img [src]="imagenPrincipal" [alt]="proyecto.nombre" class="imagen" loading="lazy" />
+    <div class="imagen-overlay"></div>
+
+    <!-- Badge de Estado -->
+    <div class="card-badge" [class]="estadoClase">
+      <span class="badge-texto">{{ estadoEtiqueta }}</span>
+    </div>
+
+    <!-- Precio -->
+    <div class="card-precio">
+      <span class="precio-desde">Desde</span>
+      <span class="precio-valor">{{ precioFormateado }}</span>
+    </div>
+  </div>
+
+  <!-- Contenido -->
+  <div class="card-contenido">
+    <!-- Ubicación -->
+    <div class="card-ubicacion">
+      <svg class="icono-ubicacion" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+      <span class="ubicacion-texto">{{ proyecto.ubicacion }}</span>
+    </div>
+
+    <!-- Nombre -->
+    <h3 class="card-titulo">{{ proyecto.nombre }}</h3>
+
+    <!-- Fecha de entrega -->
+    <div class="card-entrega" *ngIf="proyecto.estado !== 'ENTREGADO'">
+      <svg class="icono-entrega" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+      </svg>
+      <span class="entrega-texto">Entrega: {{ proyecto.fechaEntrega | date:'MMM yyyy' }}</span>
+    </div>
+
+    <!-- Características principales -->
+    <div class="card-caracteristicas">
+      <div class="caracteristica-item" *ngFor="let caracteristica of proyecto.caracteristicas | slice:0:3">
+        <span class="caracteristica-etiqueta">{{ caracteristica.etiqueta }}:</span>
+        <span class="caracteristica-valor">{{ caracteristica.valor }}</span>
+      </div>
+    </div>
+
+    <!-- Botón -->
+    <button class="card-boton">
+      <span>Ver proyecto</span>
+      <svg class="icono-flecha" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+      </svg>
+    </button>
+  </div>
+</article>

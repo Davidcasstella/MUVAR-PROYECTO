@@ -1,0 +1,64 @@
+<nav class="navbar" [class.scrolled]="esScrolled">
+  <div class="navbar-container">
+    <!-- Logo -->
+    <a routerLink="/inicio" class="navbar-logo" (click)="cerrarMenu()">
+      <img src="assets/logos/logo-muvar.svg" alt="Inversiones Muvar" class="logo-img" />
+    </a>
+
+    <!-- Menú Desktop -->
+    <div class="navbar-menu desktop">
+      <a
+        *ngFor="let enlace of enlacesNav"
+        [routerLink]="enlace.path"
+        routerLinkActive="activo"
+        [routerLinkActiveOptions]="{ exact: enlace.path === '/inicio' }"
+        class="nav-link"
+      >
+        {{ enlace.etiqueta }}
+      </a>
+    </div>
+
+    <!-- CTA Button Desktop -->
+    <div class="navbar-cta desktop">
+      <button class="btn btn-primary" (click)="agendarVisita()">
+        <span>Agenda tu visita</span>
+      </button>
+    </div>
+
+    <!-- Hamburguesa Móvil -->
+    <button
+      class="navbar-toggle mobile"
+      [class.active]="esMenuAbierto"
+      (click)="toggleMenu()"
+      aria-label="Toggle menu"
+    >
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </div>
+
+  <!-- Menú Móvil -->
+  <div class="navbar-menu-mobile mobile" [class.active]="esMenuAbierto">
+    <div class="menu-overlay" (click)="cerrarMenu()"></div>
+    <div class="menu-contenido">
+      <nav class="menu-nav">
+        <a
+          *ngFor="let enlace of enlacesNav"
+          [routerLink]="enlace.path"
+          routerLinkActive="activo"
+          [routerLinkActiveOptions]="{ exact: enlace.path === '/inicio' }"
+          class="menu-link"
+          (click)="cerrarMenu()"
+        >
+          {{ enlace.etiqueta }}
+        </a>
+      </nav>
+      <div class="menu-cta">
+        <button class="btn btn-primary btn-block" (click)="agendarVisita()">
+          Agenda tu visita
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>

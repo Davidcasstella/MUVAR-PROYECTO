@@ -1,0 +1,18 @@
+/**
+ * Tema oscuro
+ */
+
+@mixin tema-oscuro {
+  --color-fondo: #1f2937;
+  --color-fondo-oscuro: #111827;
+  --color-borde: #374151;
+  --color-texto-principal: #f9fafb;
+  --color-texto-secundario: #d1d5db;
+  --color-fondo-hover: #374151;
+  --color-primario: #60a5fa;
+  --color-primario-oscuro: #3b82f6;
+  --color-exito: #34d399;
+  --color-peligro: #f87171;
+  --color-advertencia: #fbbf24;
+  --color-info: #22d3ee;
+}

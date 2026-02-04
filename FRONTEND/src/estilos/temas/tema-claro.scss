@@ -1,0 +1,18 @@
+/**
+ * Tema claro
+ */
+
+@mixin tema-claro {
+  --color-fondo: #ffffff;
+  --color-fondo-oscuro: #f9fafb;
+  --color-borde: #e5e7eb;
+  --color-texto-principal: #111827;
+  --color-texto-secundario: #6b7280;
+  --color-fondo-hover: #f3f4f6;
+  --color-primario: #3b82f6;
+  --color-primario-oscuro: #2563eb;
+  --color-exito: #10b981;
+  --color-peligro: #ef4444;
+  --color-advertencia: #f59e0b;
+  --color-info: #06b6d4;
+}
